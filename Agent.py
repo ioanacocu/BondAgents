@@ -1,18 +1,16 @@
 import math
 import time
-import Visualization
-from Visualization import *
+
+from InitializeValues import *
 from numpy.random import choice
-pChange=0.8;
-options = [0, 1]
-probabilitiesChange = [pChange, 1-pChange]
+
 class ball:
     def __init__(self,x1,y1,x2,y2, color, speedx, speedy):
         self.ballId=canvas.create_oval(x1,y1,x2,y2, fill=color);
         self.xspeed=speedx;
         self.yspeed=speedy;
         self.color=color;
-def moveBalls(canvas, balls):
+def moveBalls(canvas, balls, options, probabilitiesChange):
     x=0
     while True:
         x=x+1;
@@ -55,3 +53,32 @@ def moveBalls(canvas, balls):
         tk.update();
 
         time.sleep(0.01)
+
+def goDemo(mimicry):
+    pChange = mimicry;
+    print(mimicry)
+    options = [0, 1]
+    probabilitiesChange = [1 - pChange, pChange]
+    i = 0;
+    while i < nAgents:
+        x1 = random.randint(r, width - r + 1);
+        y1 = random.randint(r, height - r + 1);
+        direction = random.randint(0, 2);
+        try:
+            vx = coef * math.pow(i, lam) + perturbation[i][0]  # math.log(math.fabs(math.log(i)));
+        except:
+            vx = 0;
+        # vx=math.log(1+i);
+        print(vx)
+        vx = (vx if direction == 1 else -vx);
+        direction = random.randint(0, 2);
+        # vy=(vs[i][1] if direction==1 else -vs[i][1]);
+        try:
+            vy = coef * math.pow(i, lam) + perturbation[i][1]  # math.log(math.fabs(math.log(i)));
+        except:
+            vy = 0;
+        vy = (vy if direction == 1 else -vy);
+        balls.append(
+            ball(x1, y1, x1 + r, y1 + r, "white" if choice(options, p=probabilitiesColor) == 0 else "black", vx, vy));
+        i = i + 1;
+    moveBalls(canvas, balls, options,probabilitiesChange)
