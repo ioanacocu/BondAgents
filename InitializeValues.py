@@ -5,15 +5,17 @@ from scipy.stats import expon
 
 vs=np.random.lognormal(mean=1, sigma=1, size=[nAgents,2])
 vs=np.random.exponential(scale=7, size=[nAgents,2])
-mu, sigma = 127, 30 # mean and standard deviation for colors
-cs=truncnorm(a=0., b=254/30, loc=127, scale=30).rvs(size=nAgents)
-mu, sigma = 20, 5 # mean and standard deviation for coefs
-cs = np.random.normal(mu, sigma, nAgents)
 balls=[];
-
-
 pColor=0.1;
 probabilitiesColor=[pColor,1-pColor]
+
+lam=-1;
+coef=10;
+mu, sigma = 127, 30 # mean and standard deviation for colors
+#cs=truncnorm(a=0., b=254/30, loc=127, scale=30).rvs(size=nAgents)
+#mu, sigma = 20, 5 # mean and standard deviation for coefs
+#cs = np.random.normal(mu, sigma, nAgents)
+
 
 i=0;
 while i <nAgents:
@@ -21,7 +23,7 @@ while i <nAgents:
     y1=random.randint(r,height-r+1);
     direction = random.randint(0, 2);
     try:
-        vx = 10*math.pow(i,-1)*(1-direction/100)#math.log(math.fabs(math.log(i)));
+        vx = coef*math.pow(i,lam)*(1-direction/100)#math.log(math.fabs(math.log(i)));
     except:
         vx=0;
     #vx=math.log(1+i);
@@ -30,7 +32,7 @@ while i <nAgents:
     direction = random.randint(0, 2);
     #vy=(vs[i][1] if direction==1 else -vs[i][1]);
     try:
-        vy =  10*math.pow(i,-1)*(1-direction/100) #math.log(math.fabs(math.log(i)));
+        vy =  coef*math.pow(i,lam)*(1-direction/100) #math.log(math.fabs(math.log(i)));
     except:
         vy=0;
     vy = (vy if direction == 1 else -vy);

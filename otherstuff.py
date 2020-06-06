@@ -52,3 +52,27 @@ red = random.randint(0,254);
     while len(cb) < 2:
         cb = '0' + cb;
     color=color+cr+cg+cb;
+
+
+def getColor(coef1, coef2, color1, color2):
+    coefSum=coef1+coef2;
+    c1 = (int(color2[0:2], 16)*coef1 + int(color1[0:2], 16)*coef2) / coefSum;
+    c2 = (int(color2[2:4], 16)*coef1 + int(color1[2:4], 16)*coef2) / coefSum;
+    c3 = (int(color2[4:6], 16)*coef1 + int(color1[4:6], 16)*coef2)/ coefSum;
+    cs = str(hex(math.floor(c1)));
+    cs = cs[2:len(cs)]
+    if len(cs) < 2:
+        cs = '0' + cs;
+    cb = '#' + cs;
+    cs = str(hex(math.floor(c2)));
+    cs = cs[2:len(cs)]
+    while len(cs) < 2:
+        cs = '0' + cs;
+    cb = cb + cs;
+    cs = str(hex(math.floor(c3)));
+    cs = cs[2:len(cs)]
+    while len(cs) < 2:
+        cs = '0' + cs;
+    cb = cb + cs;
+
+    return cb;
