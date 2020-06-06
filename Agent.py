@@ -3,7 +3,7 @@ import time
 import Visualization
 from Visualization import *
 from numpy.random import choice
-pChange=0.9;
+pChange=0.99;
 options = [0, 1]
 probabilitiesChange = [pChange, 1-pChange]
 class ball:
