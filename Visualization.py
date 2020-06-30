@@ -7,7 +7,7 @@ from InitializeValues import *
 from scipy.stats import truncnorm
 
 root = Toplevel()
-root.geometry("620x200")
+root.geometry("620x600")
 
 label1 = Label(root, text="Legal obligation")
 label1.pack(side=TOP)
@@ -53,7 +53,7 @@ def quit():
     m=mimicry+(var3.get() + var2.get() + var1.get()) * 0.05;
     goDemo(m)
 Button(root, text ="Hello", command = quit).pack(anchor=W)
-
+root.focus_force()
 tk.mainloop()
 
 

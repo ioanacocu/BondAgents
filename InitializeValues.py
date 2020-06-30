@@ -7,13 +7,24 @@ from tkinter import *
 width=1000;
 height=500;
 nAgents=50;
+vlocations=3;
+hlocations=3
 
 tk=Tk();
 
 mimicry=0.1;
 canvas=Canvas(tk, width=width, height=height)
+i=1;
+while i<=hlocations-1:
+    canvas.create_line(i*width/hlocations,0, i*width/hlocations,height)
+    i=i+1
+i=0
+while i<=vlocations-1:
+    canvas.create_line(0,i*height/vlocations, width, i*height/vlocations)
+    i=i+1
+
 tk.title("Bouncy Agents")
-t=canvas.create_text(100,10,fill="darkblue",font="Times 20 italic bold",
+t=canvas.create_text(200,50,fill="darkblue",font="Times 20 italic bold",
                         text="")
 canvas.pack()
 
